@@ -32,7 +32,7 @@ const App = () => {
       ) : (
         <ul>
           {pets.map((pet) => (
-            <li key={pet.id}>{pet.name}</li>
+            <li key={pet._id}>{pet.name}</li>
           ))}
         </ul>
       )}
