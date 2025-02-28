@@ -1,17 +1,13 @@
 const PetList = ({ pets, loading, showDetails }) => {
   return (
-    <ul>
+    <select name="pets" id="pets" onChange={(e) => showDetails(e.target.value)}>
+      <option value="none">Select a pet</option>
       {pets.map((pet) => (
-        <li key={pet._id}>
-          <a 
-            href="#" 
-            onClick={() => showDetails(pet._id)}
-          >
-            {pet.name}
-          </a>
-        </li>
+        <option key={pet._id} value={pet._id}>
+          {pet.name}
+        </option>
       ))}
-    </ul>
+    </select>
   );
 }
 

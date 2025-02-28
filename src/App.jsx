@@ -26,6 +26,10 @@ const App = () => {
   }, []);
 
   const handleShowDetails = (id) => {
+    if (id === "none") {
+      setSelectedPet({});
+      return;
+    }
     setSelectedPet(pets.find((pet) => pet._id === id));
     if (!selectedPet) {
       setError("Pet not found.");
