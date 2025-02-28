@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as petService from "./services/petService";
+import PetDetails from "./components/PetDetails";
+import PetList from "./components/PetList";
 
 const App = () => {
   const [pets, setPets] = useState([]);
@@ -28,25 +30,24 @@ const App = () => {
     if (!selectedPet) {
       setError("Pet not found.");
     }
+  }
 
+  const handleSetPet = (pet) => {
+    setSelectedPet(pet);
   }
 
   return (
     <div>
       <h1>Adopt a Pet</h1>
-      {loading ? (
+      
+    {loading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <ul>
-          {pets.map((pet) => (
-            <li key={pet._id}>
-              <a href="#">{pet.name}</a>
-            </li>
-          ))}
-        </ul>
+      <PetList pets={pets} loading showDetails={handleShowDetails} />
       )}
+      <PetDetails pet={selectedPet} setPet={handleSetPet} />
     </div>
   );
 };
