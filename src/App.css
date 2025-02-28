@@ -1,7 +1,5 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -39,4 +37,78 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 100vw;
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  gap: 3em;
+  align-items: left;
+  justify-content: space-between;
+  background-color: #282c34;
+  color: white;
+}
+
+header h1 {
+  font-size: 5em;
+  width: fit-content;
+  margin: 0;
+}
+
+
+
+.App-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2em;
+}
+
+.PetList-select { 
+  width: fit-content;
+  height: 2.5em;
+  padding: 0.5em;
+  font-size: 1.5em;
+  margin: auto .5em;
+}
+
+.PetDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  width: fit-content;
+  min-width: 20vw;
+  margin: auto;
+  border: 1px solid black;
+  padding: 1em;
+  border-radius: 1em;
+  background-color: darkslategrey;
+}
+
+.PetDetails p {
+  margin: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.PetForm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+  border: 1px solid black;
+  padding: 1em;
+  border-radius: 1em;
+  background-color: darkslategrey;
 }

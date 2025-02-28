@@ -3,14 +3,14 @@ const PetDetails = ({ pet, setPet }) => {
   return (
     <>
     {pet.name ? (
-      <div>
+      <div className="PetDetails">
         <h2>{pet.name}</h2>
-        <p>{pet.type}</p>
-        <p>{pet.breed}</p>
+        <p>Type: {pet.type}</p>
+        <p>Breed: {pet.breed}</p>
         <button onClick={() => setPet({})}>Close</button>
       </div>
     ) : (
-      <p>No pet selected</p>
+        <></>
     )
     }
     </>
