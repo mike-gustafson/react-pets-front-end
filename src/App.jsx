@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { fetchPets } from "./services/petService";
+import * as petService from "./services/petService";
 
 const App = () => {
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedPet, setSelectedPet] = useState({});
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const petsData = await fetchPets();
+        const petsData = await petService.fetchPets();
         setPets(petsData);
       } catch (err) {
         console.error("Error fetching pets:", err);
@@ -18,9 +20,16 @@ const App = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
+
+  const handleShowDetails = (id) => {
+    setSelectedPet(pets.find((pet) => pet._id === id));
+    if (!selectedPet) {
+      setError("Pet not found.");
+    }
+
+  }
 
   return (
     <div>
@@ -32,7 +41,9 @@ const App = () => {
       ) : (
         <ul>
           {pets.map((pet) => (
-            <li key={pet._id}>{pet.name}</li>
+            <li key={pet._id}>
+              <a href="#">{pet.name}</a>
+            </li>
           ))}
         </ul>
       )}
