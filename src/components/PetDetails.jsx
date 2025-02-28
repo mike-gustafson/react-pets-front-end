@@ -1,4 +1,4 @@
-const PetDetails = ({ pet, setPet }) => {
+const PetDetails = ({ pet, setPet, editPet, deletePet }) => {
 
   return (
     <>
@@ -8,6 +8,8 @@ const PetDetails = ({ pet, setPet }) => {
         <p>Type: {pet.type}</p>
         <p>Breed: {pet.breed}</p>
         <button onClick={() => setPet({})}>Close</button>
+        <button onClick={() => editPet(pet._id)}>Edit</button>
+        <button onClick={() => deletePet(pet._id)}>Delete</button>
       </div>
     ) : (
         <></>

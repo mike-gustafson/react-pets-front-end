@@ -26,6 +26,7 @@ const createPet = async (pet) => {
     };
 
 const updatePet = async (id, pet) => {
+    console.log(id, pet);
     const response = await fetch(`${BASE_URL}/${id}`, {
         method: 'PUT',
         headers: {

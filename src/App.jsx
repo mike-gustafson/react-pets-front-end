@@ -52,16 +52,57 @@ const App = () => {
     setIsFormOpen(!isFormOpen);
   }
 
+  const handleFormSubmit = (petData) => {
+    console.log(petData);
+    if (petData.formType === "edit") {
+      handleEditPet(selectedPet._id, petData);
+    }
+    if (petData.formType === "create") {
+      handleAddPet(petData);
+    }
+  }
+   
+
   const handleAddPet = async (newPet) => {
     try {
       const createdPet = await petService.createPet(newPet);
       setPets([...pets, createdPet]);
+      setSelectedPet(createdPet);
+      setIsFormOpen(false);
     } catch (err) {
       console.error("Error adding pet:", err);
       setError("Failed to add pet.");
     }
   }
 
+  const handleDeletePet = async (id) => {
+    try {
+      await petService.deletePet(id);
+      setPets(pets.filter((pet) => pet._id !== id));
+      setSelectedPet({});
+    } catch (err) {
+      console.error("Error deleting pet:", err);
+      setError("Failed to delete pet.");
+    }
+  }
+
+  const handleEditPet = async (id, updatedPet) => {
+    try {
+      const editedPet = await petService.updatePet(id, updatedPet);
+      const updatedPets = pets.map((pet) => (pet.id === id ? editedPet : pet));
+      setPets(updatedPets);
+      setSelectedPet(editedPet);
+      setIsFormOpen(false);
+    } catch (err) {
+      console.error("Error editing pet:", err);
+      setError("Failed to edit pet.");
+    }
+  }
+
+  const handleShowEditForm = (id) => {
+    setSelectedPet(pets.find((pet) => pet._id === id));
+    setIsFormOpen(true);
+  }
 
   return (
     <div className="App">
@@ -82,8 +123,18 @@ const App = () => {
         )}
       </header>
       <div className="App-content">
-      <PetDetails pet={selectedPet} setPet={handleSetPet} />
-      {isFormOpen && <PetForm submit={handleAddPet}/>}
+      <PetDetails 
+        pet={selectedPet} 
+        setPet={handleSetPet}
+        deletePet={handleDeletePet}
+        editPet={handleShowEditForm} />
+      {isFormOpen && 
+        <PetForm 
+          selectedPet={selectedPet}
+          submit={handleFormSubmit} 
+          selected={handleEditPet}
+          update={handleEditPet}
+        />}
       </div>
     </div>
   );
