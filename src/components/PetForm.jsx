@@ -43,8 +43,13 @@ const PetForm = ({ submit, selectedPet, update }) => {
             required
           />
           <input type="hidden" name="formType" value={selectedPet.name ? "edit" : "create" } />
-          {selectedPet.id && <button type="submit">Update</button>}
-          {!selectedPet.id && <button type="submit">Add</button>}
+          {selectedPet.name && (
+            <>
+            <button type="submit">Update</button>
+            <button type="button" onClick={() => submit({})}>Cancel</button>
+            </>
+          )}
+          {!selectedPet.name && <button type="submit">Add</button>}
         </form>
       </div>
     );
