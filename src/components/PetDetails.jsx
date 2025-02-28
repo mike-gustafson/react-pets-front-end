@@ -11,7 +11,8 @@ const PetDetails = ({ pet, setPet }) => {
       </div>
     ) : (
       <p>No pet selected</p>
-    )}
+    )
+    }
     </>
   );
 }
